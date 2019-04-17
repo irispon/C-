@@ -18,20 +18,29 @@ struct hopmanNode* Left	;
 HopManNode* newHopManNode(int,char,HopManNode*,HopManNode*);
 void init();
 void readFile(char **,int*);
-
+void sort();
 /*변수들*/
-HopManNode* nodes[MAX];
-HopManNode**nodesArray; 
+HopManNode* nodes[MAX];//배열 테스트용 
+HopManNode**nodesArray; //동적 노드 포인터 배 열 
 char asci[MAX]="ABCDEFGHIJKLMNOPQRSTUVWXYZ";// 아스키 문자의 경우(알파벳만)  
-char* file();
+
 
 int main(void){
 	
 init();
+sort();
+int a = 0;
+
+for( ; nodesArray[a]!=NULL ; a++) {
+    printf("\n문자%c , 빈도%d",nodesArray[a]->text,nodesArray[a]->number);
+    }
 
 
 
+    
 }
+
+
 
 
 void init(){
@@ -136,5 +145,28 @@ void readFile(char **buffer,int* refsize){
 
     fclose(fp);
 
-
 }
+
+void sort(){
+	/*선택정렬*/
+	
+	
+	
+	HopManNode**temp;
+	int i=0;
+	int j=0;
+	
+for(i = 0 ; nodesArray[i+1]!=NULL ; i++) {
+    for(j = i+1 ;nodesArray[j]!=NULL ; j ++) {
+        if(nodesArray[i]->number> nodesArray[j]->number) {
+            temp = nodesArray[j];
+            nodesArray[j] =nodesArray[i];
+            nodesArray[i] = temp;
+       }
+    }
+}
+
+	
+	
+	
+} 
