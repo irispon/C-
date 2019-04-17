@@ -21,8 +21,8 @@ void readFile(char **,int*);
 
 /*변수들*/
 HopManNode* nodes[MAX];
-HopManNode *nodesArray; 
-char asci[MAX]="ABCDEFGHIJKLMNOPQRSTUVWXYZ";// 아스키 문자의 최대 경우(일단 알파벳만)  
+HopManNode**nodesArray; 
+char asci[MAX]="ABCDEFGHIJKLMNOPQRSTUVWXYZ";// 아스키 문자의 경우(알파벳만)  
 char* file();
 
 int main(void){
@@ -39,6 +39,7 @@ char* fromText;//읽어온 텍스트
 int size;
 int i=0;
 int j=0;
+int arraySize=0;
 int nodesCount=0;
 int count=0;
 
@@ -48,24 +49,9 @@ readFile(&fromText,&size);
 
 printf("%s",fromText,sizeof(fromText));
  
- for(i;asci[i]!='\0';i++){
-	
-for(j;j<size&&(fromText[j]!='\0');j++){
-	
-	if(fromText[j]==asci[i]){
-		count++;
-	
-	}
+nodesArray = (HopManNode**)malloc(size*sizeof(HopManNode**));//노드 배열 선언 
 
-}
-	
-
-j=0;
-	
-}
  
- nodesArray = (HopManNode*)malloc(i*sizeof(HopManNode));
- i=0;
  
 for(i;asci[i]!='\0';i++){
 	
@@ -80,7 +66,8 @@ for(j;j<size&&(fromText[j]!='\0');j++){
 	if(count!=0){
 	
 	printf("\n%c의 빈도수: %2d  ",asci[i],count);
-	nodesArray[nodesCount] = newHopManNode(count,asci[i],NULL,NULL);
+	nodes[nodesCount] = newHopManNode(count,asci[i],NULL,NULL);
+	nodesArray[nodesCount]=newHopManNode(count,asci[i],NULL,NULL);
 	nodesCount++;
 	count=0;
 }
@@ -89,9 +76,20 @@ j=0;
 	
 }
 
- 
+
+
+
+
 free(fromText);
+
+
+
 }
+
+
+
+
+
 
 
 
@@ -113,6 +111,8 @@ HopManNode* newHopManNode(int number,char text ,HopManNode* Left ,HopManNode* Ri
 	
 	return node;	
 }
+
+
 
 
 
@@ -138,34 +138,3 @@ void readFile(char **buffer,int* refsize){
 
 
 }
-
-
-
-
-//void nodeSorting(HopManNode*nodes[],int size){
-// int i=0;
-// int j=0;
-// int min=0;
-// HopManNode* nodeTmp=NULL;
-// HopManNode* sortingNodes[MAX];
-// 
-// 
-// for(i;nodes[i]!=NULL;i++){
-// 	nodeTmp = nodes[i];
-// 	for(j=i;j<(size/sizeof(nodes[0]))&&(nodes[j]!=NULL);j++){
-// 		
-//		if(nodeTmp->number>nodes[j]->number){
-//		   nodeTmp=nodes[j];				
-//			 
-//		}	
-// 		
-//	 }
-// 	sortingNodes[j]=nodeTmp;
-// 	printf("\n%c,%d",sortingNodes[i]->text,sortingNodes[i]->number);
-// 	
-// }
-//
-// nodes= sortingNodes;
-// 
-//
-//}
